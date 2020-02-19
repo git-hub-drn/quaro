@@ -1,28 +1,20 @@
 <template>
 	<view class="index">
 		<view class="indexHead">
-			<view class="date" >{{day}}<text>{{month}}</text></view>	
-			
+			<view class="date">{{day}}<text>{{month}}</text></view>				
 			<view class="daily hours">{{hours}}</view>
 			<view class="homePage" @click="tiao()"><image src="../../static/images/tuoyuan.png" ></image></view>
 		</view>
 		<view class="box">
-			<!-- indexBanner驼峰式命名 -->
 			<view class="indexBanner">
-				<!-- autoplay interval  2秒轮播一次 1000=1秒
-				indicator-dots 是否显示指示点
-				indicator-color 默认状态下指示点的颜色
-				indicator-active-color 图片轮播之后指示点现实的颜色
-				 -->
 				<swiper autoplay interval="2000" indicator-dots  indicator-color="#666"  indicator-active-color="#ccc">
 					<swiper-item v-for="(item,index) in list" :key="index">
-						<image :src="item.image"></image>
-						<view>{{item.title}}</view>
+						<view class="texts">{{item.title}}<text class="author">{{item.hint}}</text></view>
+						<image :src="item.image"></image>					
 					</swiper-item>
 				</swiper>
 			</view>
 		</view>
-		<!-- <view class="texts">刷快手和看莎士比亚有什么区别<text class="author">作者/大象公会</text></view> -->
 		<view class="listDl">
 			<dl v-for="(n,dls) in news" :key="dls" @click="bot()">
 				<dt><image :src="n.images"></image></dt>
@@ -160,20 +152,21 @@
 </script>
 
 <style>
-.indexHead{overflow: hidden;padding: 10px 0;}	
+.indexHead{overflow: hidden;padding:5px 0}	
 .indexHead .date,.indexHead .daily{float: left;}
 .indexHead .date{font-weight: bold;border-right: 1px solid #D3D3D3;padding: 0 15px;}
 .indexHead .date text{display: block;font-size: 12px;}
 .indexHead .hours{font-weight: normal;}
 .indexHead .daily{font-size: 28px;font-weight: bold;padding-left: 15px;}
-.indexHead .homePage{float: right;padding: 5px 15px 0 0;}
+.indexHead .homePage{float: right;padding: 3px 15px 0 0;}
 .indexHead .homePage image{width: 35px;height:35px;}
-.indexBanner image{width: 100%;height: 100%;}
-.texts{position: absolute;left: 0;top: 150px;color: #fff;}
-.texts .author{display: block;font-size: 14px;color: #999;padding-top: 5px;}
+.indexBanner image{width: 100%;}
+.indexBanner{position: relative;}
+.indexBanner .texts{position: absolute;left: 20px;bottom: 15px;font-weight: bold;padding-right: 20px;color: #fff;}
+.indexBanner .author{display: block;font-weight: normal;font-size: 14px;}
 .listDl{padding: 15px;}
 .listDl dl{overflow: hidden;padding: 10upx 0;}
-.listDl dl dt image{width: 85px;height: 80px;border-radius: 5px;}
+.listDl dl dt image{width: 85px;height: 80px;border-radius: 5px;padding-left: 5px;}
 .listDl dl dt{float: right;}
 .listDl dl dd{font-size: 16px;font-weight: bold;}
 .listDl dl .read{font-size: 14px;color: #999;padding-top: 20upx;font-weight: normal;}

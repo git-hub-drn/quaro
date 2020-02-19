@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<view class="phos"><image :src="photo.image"></image><span class="titles">{{photo.title}}</span></view>
 		<view v-html="details"></view>
 		<view class="comment">
 			<view class="comOne" @click="back()"><image src="../../static/images/back.png"></image></view>
@@ -39,6 +40,7 @@
 		},
 		data(){
 			return{
+				photo: {},
 				details : '',
 				fabulous : 0,
 				fabulou : 0,
@@ -77,7 +79,8 @@
 			}
 		},
 		onLoad:function(){
-			this.getDetails()
+			this.getDetails();
+			this.getPhoto()
 		},
 		methods:{
 			getDetails(){
@@ -149,6 +152,21 @@
 			cancel(type) {
 				this.$refs['show' + type].close()
 			},
+			getPhoto : function(){
+				var _thas = this;
+				console.log(111) ;
+				uni.request({		
+					url: 'http://news-at.zhihu.com/api/4/news/3892357',
+					method: 'GET',
+					data: {},
+					success: res => {
+						 console.log(res.data.title);
+						 _thas.photo.image=res.data.image;
+						 _thas.photo.title=res.data.title;
+					}
+				});
+			},
+			
 		}
 	}
 	
@@ -156,79 +174,20 @@
 
 <style>
 /* 	@import url("http://news-at.zhihu.com/css/news_qa.auto.css?v=4b3e3"); */
+.phos{position: relative;}
+.phos image{width: 100%;}
+.phos .titles{position: absolute;left: 20px;bottom: 20px;color: #fff;font-weight: normal;}
 .comment image{width: 30px;height: 30px;vertical-align: middle;}
 .comment view{float: left;width: 19%;text-align: center;margin:30upx 0 10upx 0;position: relative;}
 .comment .comOne{border-right: 1px solid #999;}
 .comment view text{position: absolute;right: 4px;top: 0;font-size: 14px;}
-
 /* 底部分享 */
-	.uni-share {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		flex-direction: column;
-		/* #endif */
-		background-color: #fff;
-	}
-
-	.uni-share-title {
-		line-height: 60rpx;
-		font-size: 24rpx;
-		padding: 15rpx 0;
-		text-align: center;
-	}
-
-	.uni-share-content {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: center;
-		padding: 15px;
-	}
-
-	.uni-share-content-box {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: column;
-		align-items: center;
-		width: 200rpx;
-	}
-
-	.uni-share-content-image {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		width: 60rpx;
-		height: 60rpx;
-		overflow: hidden;
-		border-radius: 10rpx;
-	}
-
-	.content-image {
-		width: 60rpx;
-		height: 60rpx;
-	}
-
-	.uni-share-content-text {
-		font-size: 26rpx;
-		color: #333;
-		padding-top: 5px;
-		padding-bottom: 10px;
-	}
-
-	.uni-share-btn {
-		height: 90rpx;
-		line-height: 90rpx;
-		font-size: 14px;
-		border-top-color: #f5f5f5;
-		border-top-width: 1px;
-		border-top-style: solid;
-		text-align: center;
-		color: #666;
-	}
+.uni-share {/* #ifndef APP-NVUE */display: flex;flex-direction: column;/* #endif */background-color: #fff;}
+.uni-share-title {line-height: 60rpx;font-size: 24rpx;padding: 15rpx 0;text-align: center;}
+.uni-share-content {/* #ifndef APP-NVUE */display: flex;/* #endif */flex-direction: row;flex-wrap: wrap;justify-content: center;padding: 15px;}
+.uni-share-content-box {/* #ifndef APP-NVUE */display: flex;/* #endif */flex-direction: column;align-items: center;width: 200rpx;}
+.uni-share-content-image {/* #ifndef APP-NVUE */display: flex;/* #endif */flex-direction: row;justify-content: center;align-items: center;width: 60rpx;height: 60rpx;overflow: hidden;border-radius: 10rpx;}
+.content-image {width: 60rpx;height: 60rpx;}
+.uni-share-content-text {font-size: 26rpx;color: #333;padding-top: 5px;padding-bottom: 10px;}
+.uni-share-btn {height: 90rpx;line-height: 90rpx;font-size: 14px;border-top-color: #f5f5f5;border-top-width: 1px;border-top-style: solid;text-align: center;color: #666;}
 </style>

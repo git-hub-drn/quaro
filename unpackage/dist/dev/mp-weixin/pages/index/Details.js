@@ -133,7 +133,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniSection = function uniSection() {return __webpack_require__.e(/*! import() | components/uni-section/uni-section */ "components/uni-section/uni-section").then(__webpack_require__.bind(null, /*! @/components/uni-section/uni-section.vue */ 47));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 54));};var uniIcons = function uniIcons() {return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 61));};
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var uniSection = function uniSection() {return __webpack_require__.e(/*! import() | components/uni-section/uni-section */ "components/uni-section/uni-section").then(__webpack_require__.bind(null, /*! @/components/uni-section/uni-section.vue */ 55));};var uniPopup = function uniPopup() {return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 62));};var uniIcons = function uniIcons() {return Promise.all(/*! import() | components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/components/uni-icons/uni-icons.vue */ 69));};
+
 
 
 
@@ -174,6 +175,7 @@ var csses;var _default =
 
   data: function data() {
     return {
+      photo: {},
       details: '',
       fabulous: 0,
       fabulou: 0,
@@ -213,6 +215,7 @@ var csses;var _default =
   },
   onLoad: function onLoad() {
     this.getDetails();
+    this.getPhoto();
   },
   methods: {
     getDetails: function getDetails() {
@@ -283,6 +286,20 @@ var csses;var _default =
     },
     cancel: function cancel(type) {
       this.$refs['show' + type].close();
+    },
+    getPhoto: function getPhoto() {
+      var _thas = this;
+      console.log(111);
+      uni.request({
+        url: 'http://news-at.zhihu.com/api/4/news/3892357',
+        method: 'GET',
+        data: {},
+        success: function success(res) {
+          console.log(res.data.title);
+          _thas.photo.image = res.data.image;
+          _thas.photo.title = res.data.title;
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
